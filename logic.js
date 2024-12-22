@@ -2,6 +2,8 @@
 let firstNum = null;
 let secondNum = null;
 let operator = null;
+let currentInput = ''; //variable to store the current input
+const display = document.getElementById("display");
 
 function add (a, b){
     return a + b;
