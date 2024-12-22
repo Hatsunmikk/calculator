@@ -5,6 +5,27 @@ let operator = null;
 let currentInput = ''; //variable to store the current input
 const display = document.getElementById("display");
 
+function updateDisplay(value){
+    display.textContent = value;
+};
+
+//Addig event listeners to the buttons
+
+document.querySelectorAll(".digit").forEach(button =>
+    button.addEventListener("click", () => {
+        if(currentInput === '' || currentInput === "0"){
+            currentInput = button.textContent;
+        } else {
+            currentInput += button.textContent;
+        };
+
+        updateDisplay(currentInput);
+    }
+
+    
+   )
+);
+
 function add (a, b){
     return a + b;
 };
