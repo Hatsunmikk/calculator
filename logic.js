@@ -1,4 +1,7 @@
 
+let firstNum = null;
+let secondNum = null;
+let operator = null;
 
 function add (a, b){
     return a + b;
