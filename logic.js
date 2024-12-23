@@ -10,8 +10,7 @@ function updateDisplay(value){
     display.textContent = value;
 };
 
-//Addig event listeners to the buttons
-
+//Adding event listeners to the buttons
 document.querySelectorAll(".digit").forEach(button =>
     button.addEventListener("click", () => {
         if(resultDisplayed){
@@ -27,6 +26,25 @@ document.querySelectorAll(".digit").forEach(button =>
     
    )
 );
+
+//Adding event listeners to the operator buttons
+document.querySelectorAll(".operator").forEach(button =>
+    button.addEventListener("click", () => {
+        //if the first number and the operator are already selected, calculate the result first
+        if(firstNum !== null && currentInput !== ''){
+          secondNum = parseFloat(currentInput);
+          const result = operate(operator, firstNum, secondNum);
+          updateDisplay(result);
+          firstNum = result; //using the result as th first number for the next operation or calculation
+          currentInput = result.toString();
+          resultDisplayed = true;
+        }
+         //Saving the operator and the current number as the first number for the next operation
+        operator = button.textContent;
+        firstNum = parseFloat(currentInput);
+        currentInput = ''; //resetting the current input for the second number
+    })
+)
 
 function add (a, b){
     return a + b;
