@@ -91,6 +91,14 @@ document.getElementById("clear").addEventListener("click", () => {
   resultDisplayed = false;
 });
 
+//Decimal button functionality
+document.getElementById("decimal").addEventListener("click", () => {
+    if(!currentInput.includes('.')){
+        currentInput += '.';
+        updateDisplay(currentInput);
+    };
+});
+
 function add (a, b){
     return a + b;
 };
