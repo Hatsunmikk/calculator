@@ -32,24 +32,39 @@ document.querySelectorAll(".digit").forEach(button =>
 );
 
 //Adding event listeners to the operator buttons
-document.querySelectorAll(".operator").forEach(button =>
-    button.addEventListener("click", () => {
-        //if the first number and the operator are already selected, calculate the result first
-        if(firstNum !== null && currentInput !== ''){
-          secondNum = parseFloat(currentInput);
-          const result = operate(operator, firstNum, secondNum);
-          const roundedResult = roundResult(result);
-          updateDisplay(roundedResult);
-          firstNum = roundedResult; //using the result as th first number for the next operation or calculation
-          currentInput = roundedResult.toString();
-          resultDisplayed = true;
+document.querySelectorAll('.operator').forEach(button => 
+    button.addEventListener('click', () => {
+        // If the user has not entered a number yet, return
+        if (currentInput === '') {
+            return;
+        };
+
+        // If there's already a result displayed and the operator is pressed, treat it as a new calculation
+        if (resultDisplayed) {
+            firstNum = parseFloat(currentInput); // Treat current input as the first number
+            operator = button.textContent; // Store the new operator
+            currentInput = ''; // Clear current input for the second number
+            resultDisplayed = false; // Reset resultDisplayed flag
+        } else {
+            // Perform the calculation
+            if (firstNum !== null && operator !== null) {
+                secondNum = parseFloat(currentInput);
+                const result = operate(operator, firstNum, secondNum);
+                const roundedResult = roundResult(result);
+                updateDisplay(roundedResult);
+                firstNum = roundedResult; // Use the result as the first number for the next operation
+                currentInput = roundedResult.toString(); // Display the result as the new current input
+                resultDisplayed = true; // Mark that a result is displayed
+            }
+            // Store the operator and prepare for the next number
+            operator = button.textContent;
+            firstNum = parseFloat(currentInput); // Save the current input as the first number
+            currentInput = ''; // Reset current input for the next number
         }
-         //Saving the operator and the current number as the first number for the next operation
-        operator = button.textContent;
-        firstNum = parseFloat(currentInput);
-        currentInput = ''; //resetting the current input for the second number
+        
     })
 );
+
 
 //'Equals' button functionality
 document.getElementById("equals").addEventListener("click", () => {
