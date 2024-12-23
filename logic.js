@@ -99,6 +99,12 @@ document.getElementById("decimal").addEventListener("click", () => {
     };
 });
 
+//Backspace button functionality
+document.getElementById("backspace").addEventListener("click", () => {
+    currentInput = currentInput.slice(0, -1);
+    updateDisplay(currentInput || '0');
+});
+
 function add (a, b){
     return a + b;
 };
