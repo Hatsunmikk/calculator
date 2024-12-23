@@ -10,6 +10,10 @@ function updateDisplay(value){
     display.textContent = value;
 };
 
+function roundResult(result){
+    return Math.round(result * 100) / 100;
+}
+
 //Adding event listeners to the buttons
 document.querySelectorAll(".digit").forEach(button =>
     button.addEventListener("click", () => {
