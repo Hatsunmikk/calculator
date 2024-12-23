@@ -145,3 +145,94 @@ function operate (operator, num1, num2) {
 
     };
 };
+
+//Keyboard support
+document.addEventListener("keydown", (event) => {
+    event.preventDefault();
+
+    //handling number keys
+    if(event.key >= '0' && event.key <= '9'){
+        currentInput += event.key;
+        updateDisplay(currentInput);
+    };
+
+    //handling operator keys
+    if(event.key === '+' || event.key === '-'|| event.key === '*'|| event.key === '/'){
+        handleOperator(event.key);
+    };
+
+    // handling equals key (Enter or =)
+    if (event.key === '=' || event.key === 'Enter') {
+        handleEquals();
+    }
+
+    // handling backspace key (delete last input)
+    if (event.key === 'Backspace') {
+        currentInput = currentInput.slice(0, -1);
+        updateDisplay(currentInput || '0');
+    }
+
+    // handling clear key (Escape)
+    if (event.key === 'Escape') {
+        handleClear();
+    }
+
+    // handling decimal point
+    if (event.key === '.' && !currentInput.includes('.')) {
+        currentInput += '.';
+        updateDisplay(currentInput);
+    }
+});
+
+// Helper function to handle operator button press
+function handleOperator(key) {
+    if (currentInput === '') {
+        return;
+    }
+
+    if (resultDisplayed) {
+        firstNum = parseFloat(currentInput);
+        operator = key === '*' ? 'x' : key; // Convert * to x for multiplication
+        currentInput = '';
+        resultDisplayed = false;
+    } else {
+        if (firstNum !== null && operator !== null) {
+            secondNum = parseFloat(currentInput);
+            const result = operate(operator, firstNum, secondNum);
+            const roundedResult = roundResult(result);
+            updateDisplay(roundedResult);
+            firstNum = roundedResult;
+            currentInput = roundedResult.toString();
+            resultDisplayed = true;
+        }
+
+        operator = key === '*' ? 'x' : key;
+        firstNum = parseFloat(currentInput);
+        currentInput = '';
+    }
+}
+
+// Helper function to handle the equals button press
+function handleEquals() {
+    if (firstNum !== null && operator !== null && currentInput !== '') {
+        secondNum = parseFloat(currentInput);
+        const result = operate(operator, firstNum, secondNum);
+        const roundedResult = roundResult(result);
+        updateDisplay(roundedResult);
+        firstNum = roundedResult;
+        currentInput = roundedResult.toString();
+        resultDisplayed = true;
+    } else {
+        updateDisplay("Error");
+    }
+}
+
+// Helper function to handle the clear button press
+function handleClear() {
+    firstNum = null;
+    secondNum = null;
+    operator = null;
+    currentInput = '';
+    updateDisplay('0');
+    resultDisplayed = false;
+}
