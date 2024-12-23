@@ -58,6 +58,15 @@ document.getElementById("equals").addEventListener("click", () => {
     }
 });
 
+//'Clear' button functionality
+document.getElementById("clear").addEventListener("click", () => {
+  firstNum = null;
+  secondNum = null;
+  operator = null;
+  currentInput = '';
+  updateDisplay('0');
+});
+
 function add (a, b){
     return a + b;
 };
