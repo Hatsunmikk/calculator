@@ -14,8 +14,9 @@ function updateDisplay(value){
 
 document.querySelectorAll(".digit").forEach(button =>
     button.addEventListener("click", () => {
-        if(currentInput === '' || currentInput === "0"){
+        if(resultDisplayed){
             currentInput = button.textContent;
+            resultDisplayed = false;
         } else {
             currentInput += button.textContent;
         };
