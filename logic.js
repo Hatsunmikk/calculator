@@ -38,9 +38,10 @@ document.querySelectorAll(".operator").forEach(button =>
         if(firstNum !== null && currentInput !== ''){
           secondNum = parseFloat(currentInput);
           const result = operate(operator, firstNum, secondNum);
-          updateDisplay(result);
-          firstNum = result; //using the result as th first number for the next operation or calculation
-          currentInput = result.toString();
+          const roundedResult = roundResult(result);
+          updateDisplay(roundedResult);
+          firstNum = roundedResult; //using the result as th first number for the next operation or calculation
+          currentInput = roundedResult.toString();
           resultDisplayed = true;
         }
          //Saving the operator and the current number as the first number for the next operation
@@ -55,11 +56,14 @@ document.getElementById("equals").addEventListener("click", () => {
     if(firstNum !== null && operator !== null && currentInput !== ''){
         secondNum = parseFloat(currentInput);
         const result = operate(operator, firstNum, secondNum);
-        updateDisplay(result);
-        firstNum = result;
-        currentInput = result.toString();
+        const roundedResult = roundResult(result);
+        updateDisplay(roundedResult);
+        firstNum = roundedResult;
+        currentInput = roundedResult.toString();
         resultDisplayed = true;
-    }
+    } else {
+        updateDisplay("Error");
+    };
 });
 
 //'Clear' button functionality
