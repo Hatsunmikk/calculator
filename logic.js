@@ -44,7 +44,19 @@ document.querySelectorAll(".operator").forEach(button =>
         firstNum = parseFloat(currentInput);
         currentInput = ''; //resetting the current input for the second number
     })
-)
+);
+
+//'Equals' button functionality
+document.getElementById("equals").addEventListener("click", () => {
+    if(firstNum !== null && operator !== null && currentInput !== ''){
+        secondNum = parseFloat(currentInput);
+        const result = operate(operator, firstNum, secondNum);
+        updateDisplay(result);
+        firstNum = result;
+        currentInput = result.toString();
+        resultDisplayed = true;
+    }
+});
 
 function add (a, b){
     return a + b;
