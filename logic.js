@@ -73,6 +73,7 @@ document.getElementById("clear").addEventListener("click", () => {
   operator = null;
   currentInput = '';
   updateDisplay('0');
+  resultDisplayed = false;
 });
 
 function add (a, b){
