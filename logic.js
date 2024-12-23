@@ -3,6 +3,7 @@ let firstNum = null;
 let secondNum = null;
 let operator = null;
 let currentInput = ''; //variable to store the current input
+let resultDisplayed = false; //to handle new inputs after an evaluation
 const display = document.getElementById("display");
 
 function updateDisplay(value){
